@@ -30,7 +30,11 @@ export function parseDate(value) {
   if (!s) return null
   const iso = parseISO(s)
   if (isValid(iso)) return iso
+  // date-fns's 'yyyy' happily reads "26" as the year 0026, so only try the
+  // formats whose year width matches the input (2 digits -> 'yy').
+  const twoDigitYear = /[/-]\d{2}$/.test(s)
   for (const f of DATE_FORMATS) {
+    if (f.endsWith('yy') && !f.endsWith('yyyy') !== twoDigitYear) continue
     const d = parse(s, f, new Date())
     if (isValid(d)) return d
   }
