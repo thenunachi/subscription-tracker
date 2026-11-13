@@ -2,7 +2,7 @@
 
 Track every subscription and recurring bill in one place, see what they cost you per month and per year, and find the ones worth cancelling. Everything runs in your browser: there is no account, no server and no database, so your data never leaves your device.
 
-<!-- Add after deploying: **Live demo:** https://your-app.vercel.app -->
+**Live demo:** https://subscription-tracker-three-dusky.vercel.app
 
 <!-- Add a screenshot: save it as docs/screenshot.png and uncomment the line below.
 ![Dashboard showing monthly spend, category chart and upcoming renewals](docs/screenshot.png)
