@@ -1,0 +1,13 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
+  <rect width="512" height="512" rx="112" fill="#4f46e5"/>
+  <!-- calendar body -->
+  <rect x="120" y="138" width="272" height="250" rx="36" fill="#ffffff"/>
+  <!-- header band -->
+  <path d="M156 138h200a36 36 0 0 1 36 36v38H120v-38a36 36 0 0 1 36-36z" fill="#c7d2fe"/>
+  <!-- rings -->
+  <rect x="180" y="112" width="28" height="64" rx="14" fill="#ffffff"/>
+  <rect x="304" y="112" width="28" height="64" rx="14" fill="#ffffff"/>
+  <!-- repeat arrow: 3/4 circle, clockwise, arrowhead pointing up -->
+  <path d="M256 236 A48 48 0 1 1 208 284" fill="none" stroke="#4f46e5" stroke-width="20" stroke-linecap="round"/>
+  <path d="M208 250 L186 288 L230 288 Z" fill="#4f46e5" stroke="#4f46e5" stroke-width="6" stroke-linejoin="round"/>
+</svg>

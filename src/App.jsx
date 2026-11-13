@@ -1,8 +1,20 @@
+import { useEffect } from 'react'
+import CsvImport from './components/CsvImport'
 import Dashboard from './components/Dashboard'
+import DataTools from './components/DataTools'
 import SubscriptionForm from './components/SubscriptionForm'
 import SubscriptionList from './components/SubscriptionList'
+import { notifyUpcomingRenewals } from './lib/notifications'
+import { useSubscriptions } from './store/useSubscriptions'
 
 function App() {
+  const subscriptions = useSubscriptions((s) => s.subscriptions)
+
+  // Alert about renewals due today/tomorrow. Already-sent alerts are skipped.
+  useEffect(() => {
+    notifyUpcomingRenewals(subscriptions)
+  }, [subscriptions])
+
   return (
     <div className="min-h-screen bg-slate-50">
       <header className="border-b border-slate-200 bg-white">
@@ -17,7 +29,9 @@ function App() {
       <main className="mx-auto max-w-5xl space-y-6 px-4 py-8 sm:px-6">
         <Dashboard />
         <SubscriptionForm />
+        <CsvImport />
         <SubscriptionList />
+        <DataTools />
       </main>
     </div>
   )

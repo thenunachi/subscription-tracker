@@ -40,6 +40,17 @@ export const useSubscriptions = create(
           ),
         })),
 
+      // Load subscriptions from a backup.
+      // 'merge':   same id -> overwritten by the backup, new ids -> added
+      // 'replace': everything currently stored is discarded
+      importMany: (subs, mode = 'merge') =>
+        set((state) => {
+          if (mode === 'replace') return { subscriptions: subs }
+          const incoming = new Map(subs.map((s) => [s.id, s]))
+          const kept = state.subscriptions.filter((s) => !incoming.has(s.id))
+          return { subscriptions: [...kept, ...subs] }
+        }),
+
       remove: (id) =>
         set((state) => ({
           subscriptions: state.subscriptions.filter((s) => s.id !== id),

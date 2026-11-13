@@ -3,7 +3,7 @@ import { addMonths, addWeeks, addYears, differenceInCalendarDays, parseISO, star
 // How many times each cycle bills per year.
 const PER_YEAR = { weekly: 52, monthly: 12, quarterly: 4, yearly: 1 }
 
-const STEP = {
+export const STEP = {
   weekly: (d) => addWeeks(d, 1),
   monthly: (d) => addMonths(d, 1),
   quarterly: (d) => addMonths(d, 3),
@@ -21,12 +21,14 @@ export const yearlyTotal = (subs) =>
 
 // A stored renewal date may already be in the past; roll it forward by its
 // cycle until it is today or later.
-export function nextRenewalDate(sub, today = new Date()) {
+export function rollForward(date, cycle, today = new Date()) {
   const start = startOfDay(today)
-  let date = parseISO(sub.nextRenewal)
-  while (date < start) date = STEP[sub.cycle](date)
+  while (date < start) date = STEP[cycle](date)
   return date
 }
+
+export const nextRenewalDate = (sub, today = new Date()) =>
+  rollForward(parseISO(sub.nextRenewal), sub.cycle, today)
 
 // Subscriptions renewing within `days` days, soonest first.
 export function renewingSoon(subs, days = 7, today = new Date()) {
